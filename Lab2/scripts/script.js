@@ -62,12 +62,12 @@ guessButton.addEventListener('click', function () {
 
     let currentGuess = +guessInput.value;
 
-    if (currentGuess < 1 || currentGuess > 99){
-        guessMessage.textContent = "Please enter a number between 1 and 99.";
-        guessMessage.style.color = "red";
+    if (guessInput.value === "" || isNaN(+guessInput.value) || +guessInput.value < 1 || +guessInput.value > 99){
+        guessMessage.textContent = "Error: Enter a number between 1 and 99.";
+        guessMessage.style.color = "orange";
         return;
     }
-
+    
     guesses += " " + currentGuess;
     previousGuesses.textContent = guesses;
     guessMessage.textContent = "";
