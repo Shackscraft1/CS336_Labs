@@ -1,0 +1,59 @@
+body{
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.myFontStyle{
+    background-color: #102a43;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 40px;
+}
+
+.centerMyText{
+    text-align: center;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    background-color: white;
+    opacity: 1;
+}
+
+.stylizedButton{
+    background-color: #2878b5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input{
+    width: 180px;
+    padding: 10px;
+    border: 2px solid #2878b5;
+    border-radius: 6px;
+    margin: 5px;
+}
+
+p{
+    background-color: #102a43;
+    padding: 10px;
+    border-radius: 6px;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+#guessMessage{
+    font-weight: bold;
+    min-height: 45px;
+}
