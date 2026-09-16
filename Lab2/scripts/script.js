@@ -2,11 +2,11 @@ console.log("Whoa");
 
 //make a variable called answer with a value of 48
 //set aside a space named answer that has 48 in it
-let randomDecimal = Math.random();
-let randomRange = randomDecimal * 99;
-let answer = parseInt(randomRange) + 1;
+let answer = parseInt(Math.random() * 99) + 1;
 let guesses = "";
-let triesLeft = 6;
+let triesLeft = 7;
+let gamesWon = 0;
+let gamesLost = 0;
 
 const winMessage = "Congratulations you guessed it";
 //look up an elemnt with an id of guess Message(#gUESSmESSAGE
@@ -33,6 +33,9 @@ function showWin(){
 //showWin();
 
 let guessButton = document.querySelector("#guessButton");
+let resetButton = document.querySelector("#resetButton");
+let gamesWonText = document.querySelector("#gamesWon");
+let gamesLostText = document.querySelector("#gamesLost");
 //guessButton.addEventListener("click", showWin);
 
 //shorthand
@@ -57,22 +60,39 @@ let previousGuesses = document.querySelector("#previousGuesses");
 
 guessButton.addEventListener('click', function () {
 
-    guesses += " " + guessInput.value;
+    let currentGuess = +guessInput.value;
+
+    if (currentGuess < 1 || currentGuess > 99){
+        guessMessage.textContent = "Please enter a number between 1 and 99.";
+        guessMessage.style.color = "red";
+        return;
+    }
+
+    guesses += " " + currentGuess;
     previousGuesses.textContent = guesses;
     guessMessage.textContent = "";
-    if (+guessInput.value === answer){
+
+    //this changes the variable's value so it's one less than it used to be
+    triesLeft -= 1;
+
+    if (currentGuess === answer){
         
         guessMessage.textContent = winMessage;
-        if (triesLeft > 0) guessMessage.textContent += " ---- You did it before 7 tries, wow!!!";
         guessMessage.style.color = "green";
-        guessButton.disabled = true;
+        gamesWon += 1;
+        gamesWonText.textContent = gamesWon;
+        guessButton.hidden = true;
+        resetButton.hidden = false;
 
 
-    }else if(+triesLeft === 0){
-        guessButton.disabled = true;
-        guessMessage.textContent = "You've ran out of guess womp womp :( "
+    }else if(triesLeft === 0){
+        guessMessage.textContent = "You Lost! The number was " + answer;
         guessMessage.style.color = "red";
-    }else if(+guessInput.value < answer){
+        gamesLost += 1;
+        gamesLostText.textContent = gamesLost;
+        guessButton.hidden = true;
+        resetButton.hidden = false;
+    }else if(currentGuess < answer){
         guessMessage.textContent = "Wrong guess. Your guess was too low. " + guessMessage.textContent;
         guessMessage.style.color = "red";
     }else {
@@ -80,9 +100,18 @@ guessButton.addEventListener('click', function () {
         guessMessage.style.color = "red";
     }
 
-    //this changes the variable's value so it's one less than it used to be
-    triesLeft -= 1; //-=, +=, /=, *=
-
     console.log(triesLeft);
 
+});
+
+resetButton.addEventListener('click', function () {
+    answer = parseInt(Math.random() * 99) + 1;
+    guesses = "";
+    triesLeft = 7;
+    guessInput.value = "";
+    previousGuesses.textContent = "";
+    guessMessage.textContent = "";
+    guessMessage.style.color = "white";
+    guessButton.hidden = false;
+    resetButton.hidden = true;
 });
