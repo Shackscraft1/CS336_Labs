@@ -1,0 +1,114 @@
+body {
+    background-color: #111820;
+    color: #e8eef4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+header {
+    background-color: #102a43;
+    padding: 25px;
+    border-bottom: 3px solid #2878b5;
+    box-shadow: 0 3px 10px #000000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 40px;
+    letter-spacing: 1px;
+}
+
+header p {
+    color: #9fb3c8;
+    margin-bottom: 0;
+}
+
+main {
+    max-width: 700px;
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+.question {
+    background-color: #18222c;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #294d70;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px #000000;
+}
+
+#radioChoices {
+    text-align: center;
+}
+
+#checkboxChoices {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.checkboxChoice {
+    padding: 5px;
+}
+
+input, select {
+    background-color: #253341;
+    color: #e8eef4;
+    margin: 5px;
+    padding: 6px;
+    border: 1px solid #52708c;
+    border-radius: 4px;
+}
+
+label {
+    font-weight: normal;
+}
+
+button {
+    background-color: #2878b5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #3498db;
+}
+
+.feedbackText {
+    display: inline;
+    font-weight: bold;
+}
+
+.feedbackImage {
+    display: none;
+    width: 25px;
+    height: 25px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+#scoreMessage {
+    color: #9fb3c8;
+    margin-top: 20px;
+}
+
+#congratulationMessage {
+    color: lightgreen;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#totalAttemptsMessage {
+    color: #9fb3c8;
+    font-size: 15px;
+}

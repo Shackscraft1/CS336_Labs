@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Simple Web Quiz</h1>
+        <p>Answer the questions and check your score.</p>
+    </header>
+
+    <main>
+        <div class="question">
+            <p>1. Which one is a web browser?</p>
+
+            <div id="radioChoices">
+                <input type="radio" id="chrome" name="question1" value="Chrome"><label for="chrome">Chrome</label>
+
+                <input type="radio" id="htmlChoice" name="question1" value="HTML"><label for="htmlChoice">HTML</label>
+
+                <input type="radio" id="cssChoice" name="question1" value="CSS"><label for="cssChoice">CSS</label>
+
+                <input type="radio" id="java" name="question1" value="Java"><label for="java">Java</label>
+            </div>
+
+            <p id="question1Feedback" class="feedbackText"></p>
+            <img id="question1Image" class="feedbackImage" alt="">
+        </div>
+
+        <div class="question">
+            <label for="question2">2. Which letter is used in the paragraph tag?</label>
+            <br>
+            <input id="question2" type="text">
+            <br>
+            <p id="question2Feedback" class="feedbackText"></p>
+            <img id="question2Image" class="feedbackImage" alt="">
+        </div>
+
+        <div class="question">
+            <label for="question3">3. Which language adds style to a webpage?</label>
+            <br>
+            <select id="question3">
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JavaScript">JavaScript</option>
+            </select>
+            <br>
+            <p id="question3Feedback" class="feedbackText"></p>
+            <img id="question3Image" class="feedbackImage" alt="">
+        </div>
+
+        <div class="question">
+            <label for="question4">4. How many heading levels does HTML have?</label>
+            <br>
+            <input id="question4" type="number">
+            <br>
+            <p id="question4Feedback" class="feedbackText"></p>
+            <img id="question4Image" class="feedbackImage" alt="">
+        </div>
+
+        <div class="question">
+            <p>5. Select the two languages used to structure and style a webpage.</p>
+
+            <div id="checkboxChoices">
+                <div class="checkboxChoice">
+                    <input type="checkbox" id="html" value="HTML"><label for="html">HTML</label>
+                </div>
+
+                <div class="checkboxChoice">
+                    <input type="checkbox" id="css" value="CSS"><label for="css">CSS</label>
+                </div>
+
+                <div class="checkboxChoice">
+                    <input type="checkbox" id="python" value="Python"><label for="python">Python</label>
+                </div>
+            </div>
+
+            <p id="question5Feedback" class="feedbackText"></p>
+            <img id="question5Image" class="feedbackImage" alt="">
+        </div>
+
+        <button id="submitButton">Submit Quiz</button>
+
+        <h2 id="scoreMessage">Score: 0</h2>
+        <p id="congratulationMessage"></p>
+        <p id="totalAttemptsMessage">Total Times Quiz Was Taken: 0</p>
+    </main>
+
+    <script src="scripts/script.js" defer></script>
+</body>
+</html>
