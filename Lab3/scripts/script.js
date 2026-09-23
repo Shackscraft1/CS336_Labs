@@ -40,82 +40,59 @@ totalAttemptsMessage.textContent = "Total Times Quiz Was Taken: " + totalAttempt
 submitButton.addEventListener("click", function () {
     let score = 0;
 
+    function checkAnswer(correct, feedback, image, wrongMessage) {
+        if (correct) {
+            feedback.textContent = "Correct!";
+            feedback.style.color = "lightgreen";
+            image.src = "images/check.png";
+            image.alt = "Correct";
+            score += 20;
+        } else {
+            feedback.textContent = wrongMessage;
+            feedback.style.color = "red";
+            image.src = "images/x.png";
+            image.alt = "Incorrect";
+        }
+
+        image.style.display = "inline";
+    }
+
     let selectedOption = document.querySelector("input[name=question1]:checked");
 
-    if (selectedOption && selectedOption.value === "Chrome") {
-        question1Feedback.textContent = "Correct!";
-        question1Feedback.style.color = "lightgreen";
-        question1Image.src = "images/check.png";
-        question1Image.alt = "Correct";
-        question1Image.style.display = "inline";
-        score += 20;
-    } else {
-        question1Feedback.textContent = "Wrong. The answer is Chrome.";
-        question1Feedback.style.color = "red";
-        question1Image.src = "images/x.png";
-        question1Image.alt = "Incorrect";
-        question1Image.style.display = "inline";
-    }
+    checkAnswer(
+        selectedOption && selectedOption.value === "Chrome",
+        question1Feedback,
+        question1Image,
+        "Wrong. The answer is Chrome."
+    );
 
-    if (question2Input.value === "p" || question2Input.value === "P") {
-        question2Feedback.textContent = "Correct!";
-        question2Feedback.style.color = "lightgreen";
-        question2Image.src = "images/check.png";
-        question2Image.alt = "Correct";
-        question2Image.style.display = "inline";
-        score += 20;
-    } else {
-        question2Feedback.textContent = "Wrong. The answer is p.";
-        question2Feedback.style.color = "red";
-        question2Image.src = "images/x.png";
-        question2Image.alt = "Incorrect";
-        question2Image.style.display = "inline";
-    }
+    checkAnswer(
+        question2Input.value === "p" || question2Input.value === "P",
+        question2Feedback,
+        question2Image,
+        "Wrong. The answer is p."
+    );
 
-    if (question3Input.value === "CSS") {
-        question3Feedback.textContent = "Correct!";
-        question3Feedback.style.color = "lightgreen";
-        question3Image.src = "images/check.png";
-        question3Image.alt = "Correct";
-        question3Image.style.display = "inline";
-        score += 20;
-    } else {
-        question3Feedback.textContent = "Wrong. The answer is CSS.";
-        question3Feedback.style.color = "red";
-        question3Image.src = "images/x.png";
-        question3Image.alt = "Incorrect";
-        question3Image.style.display = "inline";
-    }
+    checkAnswer(
+        question3Input.value === "CSS",
+        question3Feedback,
+        question3Image,
+        "Wrong. The answer is CSS."
+    );
 
-    if (+question4Input.value === 6) {
-        question4Feedback.textContent = "Correct!";
-        question4Feedback.style.color = "lightgreen";
-        question4Image.src = "images/check.png";
-        question4Image.alt = "Correct";
-        question4Image.style.display = "inline";
-        score += 20;
-    } else {
-        question4Feedback.textContent = "Wrong. The answer is 6.";
-        question4Feedback.style.color = "red";
-        question4Image.src = "images/x.png";
-        question4Image.alt = "Incorrect";
-        question4Image.style.display = "inline";
-    }
+    checkAnswer(
+        +question4Input.value === 6,
+        question4Feedback,
+        question4Image,
+        "Wrong. The answer is 6."
+    );
 
-    if (htmlOption.checked && cssOption.checked && pythonOption.checked == false) {
-        question5Feedback.textContent = "Correct!";
-        question5Feedback.style.color = "lightgreen";
-        question5Image.src = "images/check.png";
-        question5Image.alt = "Correct";
-        question5Image.style.display = "inline";
-        score += 20;
-    } else {
-        question5Feedback.textContent = "Wrong. The answers are HTML and CSS.";
-        question5Feedback.style.color = "red";
-        question5Image.src = "images/x.png";
-        question5Image.alt = "Incorrect";
-        question5Image.style.display = "inline";
-    }
+    checkAnswer(
+        htmlOption.checked && cssOption.checked && pythonOption.checked == false,
+        question5Feedback,
+        question5Image,
+        "Wrong. The answers are HTML and CSS."
+    );
 
     scoreMessage.textContent = "Score: " + score;
 
