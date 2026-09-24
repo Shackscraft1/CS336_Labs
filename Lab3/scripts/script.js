@@ -18,16 +18,21 @@ let question3Image = document.querySelector("#question3Image");
 let question4Image = document.querySelector("#question4Image");
 let question5Image = document.querySelector("#question5Image");
 
+let quizForm = document.querySelector("#quizForm");
 let submitButton = document.querySelector("#submitButton");
 let scoreMessage = document.querySelector("#scoreMessage");
 let congratulationMessage = document.querySelector("#congratulationMessage");
 let totalAttemptsMessage = document.querySelector("#totalAttemptsMessage");
 
-let checkboxChoices = document.querySelectorAll(".checkboxChoice");
+function randomizeChoices() {
+    let choices = document.querySelectorAll(".radioChoice, .checkboxChoice");
 
-for (let i = 0; i < checkboxChoices.length; i++) {
-    checkboxChoices[i].style.order = parseInt(Math.random() * 100);
+    for (let i = 0; i < choices.length; i++) {
+        choices[i].style.order = parseInt(Math.random() * 100);
+    }
 }
+
+randomizeChoices();
 
 let totalAttempts = localStorage.getItem("totalAttempts");
 
@@ -38,6 +43,24 @@ if (totalAttempts === null) {
 totalAttemptsMessage.textContent = "Total Times Quiz Was Taken: " + totalAttempts;
 
 submitButton.addEventListener("click", function () {
+    if (submitButton.textContent === "Resubmit Quiz") {
+        quizForm.reset();
+
+        let feedback = document.querySelectorAll(".feedbackText");
+        let images = document.querySelectorAll(".feedbackImage");
+
+        for (let i = 0; i < feedback.length; i++) {
+            feedback[i].textContent = "";
+            images[i].style.display = "none";
+        }
+
+        scoreMessage.textContent = "Score: 0";
+        congratulationMessage.textContent = "";
+        submitButton.textContent = "Submit Quiz";
+        randomizeChoices();
+        return;
+    }
+
     let score = 0;
 
     function checkAnswer(correct, feedback, image, wrongMessage) {
@@ -105,4 +128,5 @@ submitButton.addEventListener("click", function () {
     totalAttempts = +totalAttempts + 1;
     localStorage.setItem("totalAttempts", totalAttempts);
     totalAttemptsMessage.textContent = "Total Times Quiz Was Taken: " + totalAttempts;
+    submitButton.textContent = "Resubmit Quiz";
 });

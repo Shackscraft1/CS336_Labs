@@ -42,18 +42,14 @@ main {
     box-shadow: 0 2px 6px #000000;
 }
 
-#radioChoices {
-    text-align: center;
-}
-
-#checkboxChoices {
+#radioChoices, #checkboxChoices {
     display: flex;
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
 }
 
-.checkboxChoice {
+.radioChoice, .checkboxChoice {
     padding: 5px;
 }
 
