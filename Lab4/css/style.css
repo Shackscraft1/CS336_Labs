@@ -1,0 +1,93 @@
+body {
+    background-color: #111820;
+    color: #e8eef4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #102a43;
+    text-align: center;
+    padding: 25px;
+    border-bottom: 3px solid #2878b5;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+header p {
+    color: #9fb3c8;
+    margin-bottom: 0;
+}
+
+main {
+    max-width: 650px;
+    width: 90%;
+    margin: 25px auto;
+}
+
+fieldset {
+    background-color: #18222c;
+    border: 1px solid #294d70;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 8px #000000;
+}
+
+legend {
+    background-color: #2878b5;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+label {
+    display: inline-block;
+    width: 175px;
+    margin-top: 10px;
+}
+
+input, select {
+    background-color: #253341;
+    color: #e8eef4;
+    width: 240px;
+    padding: 7px;
+    border: 1px solid #52708c;
+    border-radius: 4px;
+}
+
+.location {
+    margin: 8px 0 8px 180px;
+    color: #9fb3c8;
+}
+
+.message {
+    min-height: 20px;
+    margin: 5px 0 5px 180px;
+    font-size: 14px;
+}
+
+#suggestedPassword {
+    color: #7cc5ff;
+}
+
+#passwordError, #zipMessage {
+    color: #ff6b6b;
+}
+
+input[type="submit"] {
+    background-color: #2878b5;
+    color: white;
+    width: auto;
+    padding: 10px 25px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #3498db;
+}

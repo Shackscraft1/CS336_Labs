@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Anime Search</h1>
+
+        <nav>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="games.html">Games</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="anime.html">Anime</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="filters">
+            <h2>Filters</h2>
+
+            <label for="titleFilter">Anime Title:</label>
+            <input id="titleFilter" type="text">
+
+            <br><br>
+
+            <label for="typeFilter">Type:</label>
+            <select id="typeFilter">
+                <option value="">Select Type</option>
+                <option value="TV">TV</option>
+                <option value="movie">Movie</option>
+                <option value="OVA">OVA</option>
+                <option value="special">Special</option>
+            </select>
+
+            <br><br>
+
+            <button id="resetAnimeButton" type="button">Reset Filters</button>
+
+            <p id="animeMessage" class="errorMessage"></p>
+        </section>
+
+        <h2>Results</h2>
+        <section id="animeResults" class="resultsGrid"></section>
+    </main>
+
+    <footer>
+        <p>CST 336 Midterm Project</p>
+        <p>Anime data provided by <a href="https://kitsu.io">Kitsu</a></p>
+    </footer>
+
+    <script src="js/anime.js" defer></script>
+</body>
+</html>
