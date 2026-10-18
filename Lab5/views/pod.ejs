@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Picture of the Day</title>
+    <%- include('partials/includes.ejs') %>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-dark text-light">
+
+    <%- include('partials/nav.ejs') %>
+
+    <main class="container my-auto py-4">
+        <div class="text-center">
+
+            <% if(mediaType == "video"){ %>
+                <iframe width="100%" height="650" src="<%= video %>" frameborder="0" allowfullscreen></iframe>
+            <% } else { %>
+                <img class="img-fluid rounded shadow" src="<%= image %>" alt="NASA Picture of the Day" />
+            <% } %>
+
+        </div>
+    </main>
+
+    <%- include('partials/footer.ejs') %>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System - Home</title>
+    <%- include('partials/includes.ejs') %>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-dark text-light">
+    
+    <%- include('partials/nav.ejs') %>
+
+    <main class="container my-auto py-3">
+        <% if(errorMessage){ %>
+            <div class="alert alert-danger text-center my-4" role="alert">
+                <h4><%= errorMessage %></h4>
+            </div>
+        <% } else { %>
+            <div class="results">
+                <% for(let result of resultImages){ %>
+                    <div class="result shadow-lg rounded border border-secondary overflow-hidden">
+                        <img src="<%= result %>" alt="Solar System Image"/>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </main>
+
+    <%- include('partials/footer.ejs') %>
+
+</body>
+</html>

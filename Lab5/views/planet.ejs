@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= name %> - Solar System</title>
+    <%- include('partials/includes.ejs') %>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-dark text-light">
+
+    <%- include('partials/nav.ejs') %>
+
+    <main class="container my-auto py-4">
+        <% if(planetInfo){ %>
+            <div class="row align-items-center g-4 bg-body-tertiary p-4 rounded-4 shadow border border-secondary">
+                
+                <div class="col-md-5 text-center">
+                    <img class="planetImage img-fluid rounded shadow" src="<%= image %>" alt="<%= name %>" />
+                </div>
+
+                <div class="col-md-7">
+                    <h2 class="text-info mb-3"><%= name %> Details</h2>
+                    
+                    <% if(planetInfo.distanceFromSun) { %>
+                        <p><strong>Distance from Sun:</strong> <%= planetInfo.distanceFromSun %></p>
+                    <% } %>
+
+                    <% if(planetInfo.yearLength) { %>
+                        <p><strong>Year Length:</strong> <%= planetInfo.yearLength %></p>
+                    <% } %>
+
+                    <% if(planetInfo.radius) { %>
+                        <p><strong>Radius:</strong> <%= planetInfo.radius %> miles</p>
+                    <% } %>
+
+                    <% if(planetInfo.moons !== undefined) { %>
+                        <p><strong>Number of Moons:</strong> <%= planetInfo.moons %></p>
+                    <% } %>
+
+                    <% if(planetInfo.oneEarthDay) { %>
+                        <p><strong>Day Length:</strong> <%= planetInfo.oneEarthDay %></p>
+                    <% } %>
+
+                    <% if(planetInfo.def) { %>
+                        <p><strong>Definition:</strong> <%= planetInfo.def %></p>
+                    <% } %>
+
+                    <% if(planetInfo.description) { %>
+                        <p class="mt-3"><%= planetInfo.description %></p>
+                    <% } %>
+
+                    <% if(planetInfo.websiteLink || planetInfo.link) { %>
+                        <a href="<%= planetInfo.websiteLink || planetInfo.link %>" target="_blank" class="btn btn-outline-info mt-2">More Information &rarr;</a>
+                    <% } %>
+                </div>
+
+            </div>
+        <% } else { %>
+            <div class="text-center my-4">
+                <img class="img-fluid rounded border border-danger max-w-100 mb-3" style="max-height: 350px;" src="<%= image %>" alt="Page not found" />
+            </div>
+        <% } %>
+    </main>
+
+    <%- include('partials/footer.ejs') %>
+
+</body>
+</html>
