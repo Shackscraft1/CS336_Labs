@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+<article>
+    <h1 class="text-center mb-4">Character Review</h1>
+    <div class="row justify-content-center g-4 align-items-center">
+        <div class="col-md-5 text-center">
+            <img class="character-full" src="<%= character.image %>" alt="<%= character.name %>" onerror="this.src='/images/placeholder.svg'">
+        </div>
+        <div class="col-md-6">
+            <section class="simple-box mb-3">
+                <h2><%= character.name %></h2>
+                <% if (character.japanese) { %><p><%= character.japanese %></p><% } %>
+                <p class="description"><%= character.description %></p>
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                    <% if (currentUser) { %>
+                        <form action="/character/<%= character.id %>/like" method="POST">
+                            <button class="btn btn-outline-danger" type="submit"><%= userLiked ? '♥ Unlike' : '♡ Like' %></button>
+                        </form>
+                    <% } else { %>
+                        <a class="btn btn-outline-danger" href="/login">♡ Log in to like</a>
+                    <% } %>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#likedByModal"><%= likedBy.length %> likes · View users</button>
+                </div>
+            </section>
+            <section class="simple-box">
+                <h3 class="h5">Comments</h3>
+                <% if (comments.length === 0) { %><p>No comments yet.</p><% } %>
+                <% for (let row of comments) { %>
+                    <p><a href="/profile/<%= row.userId %>"><%= row.username %></a>: <%= row.comment %></p>
+                <% } %>
+                <% if (currentUser) { %>
+                    <form action="/character/<%= character.id %>/comment" method="POST">
+                        <label class="form-label" for="comment">Add a comment</label>
+                        <textarea id="comment" name="comment" class="form-control mb-2" rows="3" maxlength="1000" required></textarea>
+                        <button class="btn btn-primary" type="submit">Post Comment</button>
+                    </form>
+                <% } else { %>
+                    <p><a href="/login">Log in</a> to post a comment.</p>
+                <% } %>
+            </section>
+        </div>
+    </div>
+    <p class="text-center mt-4"><a href="/">Back to characters</a></p>
+</article>
+<div class="modal fade" id="likedByModal" tabindex="-1" aria-labelledby="likedByTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="likedByTitle">Liked by</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <% if (likedBy.length === 0) { %><p>No likes yet.</p><% } %>
+                <% for (let row of likedBy) { %>
+                    <p><a href="/profile/<%= row.userId %>"><%= row.username %></a></p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<section>
+    <h1 class="text-center mb-2">Uma Musume Characters</h1>
+    <p class="text-center mb-4">Choose a character to view their review page.</p>
+    <form id="filterForm" class="row g-3 mb-4" aria-label="Character filters">
+        <div class="col-md-6">
+            <label for="search" class="form-label">Search by name</label>
+            <input type="text" id="search" class="form-control" placeholder="Search characters...">
+        </div>
+        <div class="col-md-3">
+            <label for="sort" class="form-label">Sort</label>
+            <select id="sort" class="form-select">
+                <option value="az">A to Z</option>
+                <option value="za">Z to A</option>
+                <option value="id">Character ID</option>
+            </select>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="japaneseNames">
+                <label class="form-check-label" for="japaneseNames">Show Japanese names</label>
+            </div>
+        </div>
+    </form>
+    <p id="message" class="text-center">Loading characters...</p>
+    <div id="characters" class="row row-cols-2 row-cols-md-5 g-3"></div>
+    <nav class="d-flex justify-content-center align-items-center gap-3 mt-4" aria-label="Character pages">
+        <button id="previous" class="btn btn-outline-secondary" type="button" disabled>Previous</button>
+        <span id="pageNumber">Page 1</span>
+        <button id="next" class="btn btn-outline-secondary" type="button" disabled>Next</button>
+    </nav>
+</section>
+<%- include('partials/footer') %>
