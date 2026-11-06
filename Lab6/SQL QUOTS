@@ -1,3 +1,0 @@
-SELECT quoteId, quote, authorId, firstName, lastName FROM quotes NATURAL JOIN authors WHERE quote LIKE '%life%' ORDER BY lastName;
-
-
