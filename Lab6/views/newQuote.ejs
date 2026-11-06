@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Quote</title>
+</head>
+<body>
+    <h1>New Quote</h1>
+    <form action="/insertQuote" method="post">
+        <label for="quoteInput">Quote</label>
+        <input name="quote" id="quoteInput" value="<%= formObject.quote || '' %>">
+        <% if (formErrors.quote) { %>
+            <span><%= formErrors.quote %></span>
+        <% } %>
+        <br><br>
+
+        <label for="authorInput">Author</label>
+        <select name="authorId" id="authorInput">
+            <option value="">Select an author</option>
+            <% for (let author of formData.authors) { %>
+                <option value="<%= author.authorId %>" <%= formObject.authorId == author.authorId ? 'selected' : '' %>><%= author.firstName %> <%= author.lastName %></option>
+            <% } %>
+        </select>
+        <% if (formErrors.authorId) { %>
+            <span><%= formErrors.authorId %></span>
+        <% } %>
+        <br><br>
+
+        <label for="categoryInput">Category</label>
+        <select name="category" id="categoryInput">
+            <option value="">Select a category</option>
+            <% for (let category of formData.categories) { %>
+                <option value="<%= category.category %>" <%= formObject.category == category.category ? 'selected' : '' %>><%= category.category %></option>
+            <% } %>
+        </select>
+        <% if (formErrors.category) { %>
+            <span><%= formErrors.category %></span>
+        <% } %>
+        <br><br>
+
+        <label for="likesInput">Likes</label>
+        <input type="number" name="likes" id="likesInput" min="0" value="<%= formObject.likes ?? 0 %>">
+        <% if (formErrors.likes) { %>
+            <span><%= formErrors.likes %></span>
+        <% } %>
+        <br><br>
+
+        <button>Create</button>
+    </form>
+    <p><a href="/">Home</a></p>
+</body>
+</html>

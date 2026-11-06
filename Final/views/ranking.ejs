@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<section>
+    <h1 class="text-center mb-2">Top 5 Most Liked</h1>
+    <p class="text-center mb-4">Ranked by likes from users.</p>
+    <% if (rows.length === 0) { %><p class="text-center">No characters available yet.</p><% } %>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-5 g-3 justify-content-center">
+        <% let rank = 1; %>
+        <% for (let row of rows) { %>
+            <article class="col">
+                <a class="character-card text-center" href="/character/<%= row.umaId %>">
+                    <h2 class="h5">#<%= rank %></h2>
+                    <img class="character-image mb-2" src="<%= row.img || '/images/placeholder.svg' %>" alt="<%= row.name %>" onerror="this.src='/images/placeholder.svg'">
+                    <p class="mb-1"><%= row.name %></p>
+                    <p class="mb-0"><%= row.totalLikes %> likes</p>
+                </a>
+            </article>
+            <% rank++; %>
+        <% } %>
+    </div>
+</section>
+<%- include('partials/footer') %>
