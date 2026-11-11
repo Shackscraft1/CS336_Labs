@@ -8,17 +8,26 @@
 </head>
 <body>
     <h1>Edit Quote</h1>
+    <!-- Where you type in the quote -->
     <form action="/updateQuote" method="post">
+
+        <!-- This keeps track fo the quote Id we're editing so
+             we can submit this when we click update -->
         <input type="hidden" name="quoteId" value="<%= formObject.quoteId %>">
 
         <label for="quoteInput">Quote</label>
+        <!-- The "value" being set fills in the text box with the current quote -->
         <input name="quote" id="quoteInput" value="<%= formObject.quote %>">
+
+        <!-- Checks if there is a formErrors object 
+             and if it has an entry for the user field  -->
         <% if (formErrors.quote) { %>
-            <span><%= formErrors.quote %></span>
+            <span class="form-error"><%= formErrors.quote %></span>
         <% } %>
         <br><br>
 
         <label for="authorInput">Author</label>
+        <!-- The if statement is to make sure the correct author is selected by default -->
         <select name="authorId" id="authorInput">
             <option value="">Select an author</option>
             <% for (let author of formData.authors) { %>
@@ -30,7 +39,7 @@
             <% } %>
         </select>
         <% if (formErrors.authorId) { %>
-            <span><%= formErrors.authorId %></span>
+            <span class="form-error"><%= formErrors.authorId %></span>
         <% } %>
         <br><br>
 
@@ -46,14 +55,14 @@
             <% } %>
         </select>
         <% if (formErrors.category) { %>
-            <span><%= formErrors.category %></span>
+            <span class="form-error"><%= formErrors.category %></span>
         <% } %>
         <br><br>
 
         <label for="likesInput">Likes</label>
         <input type="number" name="likes" id="likesInput" min="0" value="<%= formObject.likes ?? 0 %>">
         <% if (formErrors.likes) { %>
-            <span><%= formErrors.likes %></span>
+            <span class="form-error"><%= formErrors.likes %></span>
         <% } %>
         <br><br>
 

@@ -8,23 +8,33 @@
 </head>
 <body>
     <h1>New Quote</h1>
+    <!-- Where you type in the quote -->
     <form action="/insertQuote" method="post">
         <label for="quoteInput">Quote</label>
         <input name="quote" id="quoteInput" value="<%= formObject.quote || '' %>">
+
+        <!-- Checks if there is a formErrors object
+             and if it has an entry for the user field  -->
         <% if (formErrors.quote) { %>
-            <span><%= formErrors.quote %></span>
+            <span class="form-error"><%= formErrors.quote %></span>
         <% } %>
         <br><br>
 
         <label for="authorInput">Author</label>
-        <select name="authorId" id="authorInput">
+        <select name="authorId" id="authorInput"
+                onchange="document.getElementById('selectedId').textContent = this.value">
             <option value="">Select an author</option>
             <% for (let author of formData.authors) { %>
-                <option value="<%= author.authorId %>" <%= formObject.authorId == author.authorId ? 'selected' : '' %>><%= author.firstName %> <%= author.lastName %></option>
+                <option value="<%= author.authorId %>" <%= formObject.authorId == author.authorId ? 'selected' : '' %>>
+                    <%= author.firstName %> <%= author.lastName %>
+                </option>
             <% } %>
         </select>
+
+        <span>Author ID: <span id="selectedId"><%= formObject.authorId || '' %></span></span>
+
         <% if (formErrors.authorId) { %>
-            <span><%= formErrors.authorId %></span>
+            <span class="form-error"><%= formErrors.authorId %></span>
         <% } %>
         <br><br>
 
@@ -32,18 +42,20 @@
         <select name="category" id="categoryInput">
             <option value="">Select a category</option>
             <% for (let category of formData.categories) { %>
-                <option value="<%= category.category %>" <%= formObject.category == category.category ? 'selected' : '' %>><%= category.category %></option>
+                <option value="<%= category.category %>" <%= formObject.category == category.category ? 'selected' : '' %>>
+                    <%= category.category %>
+                </option>
             <% } %>
         </select>
         <% if (formErrors.category) { %>
-            <span><%= formErrors.category %></span>
+            <span class="form-error"><%= formErrors.category %></span>
         <% } %>
         <br><br>
 
         <label for="likesInput">Likes</label>
         <input type="number" name="likes" id="likesInput" min="0" value="<%= formObject.likes ?? 0 %>">
         <% if (formErrors.likes) { %>
-            <span><%= formErrors.likes %></span>
+            <span class="form-error"><%= formErrors.likes %></span>
         <% } %>
         <br><br>
 

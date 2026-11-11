@@ -8,54 +8,50 @@
 </head>
 <body>
     <h1>New Author</h1>
+
     <form action="/insertAuthor" method="post">
-        <label for="firstNameInput">First Name</label>
-        <input name="firstName" id="firstNameInput" value="<%= formObject.firstName || '' %>">
+
+        <input name="firstName" placeholder="First Name" value="<%= formObject.firstName || '' %>">
         <% if (formErrors.firstName) { %>
             <span><%= formErrors.firstName %></span>
         <% } %>
         <br><br>
 
-        <label for="lastNameInput">Last Name</label>
-        <input name="lastName" id="lastNameInput" value="<%= formObject.lastName || '' %>">
+        <input name="lastName" placeholder="Last Name" value="<%= formObject.lastName || '' %>">
         <% if (formErrors.lastName) { %>
             <span><%= formErrors.lastName %></span>
         <% } %>
         <br><br>
 
-        <label for="dobInput">Date of Birth</label>
-        <input type="date" name="dob" id="dobInput" value="<%= formObject.dob || '' %>">
+        Date of Birth:
+        <input type="date" name="dob" value="<%= formObject.dob || '' %>">
         <br><br>
 
-        <label for="dodInput">Date of Death</label>
-        <input type="date" name="dod" id="dodInput" value="<%= formObject.dod || '' %>">
+        Date of Death:
+        <input type="date" name="dod" value="<%= formObject.dod || '' %>">
         <% if (formErrors.dod) { %>
             <span><%= formErrors.dod %></span>
         <% } %>
         <br><br>
 
-        <label for="genderInput">Gender</label>
-        <input name="gender" id="genderInput" value="<%= formObject.gender || '' %>">
+        <input name="gender" placeholder="Gender" value="<%= formObject.gender || '' %>">
+        <br><br>
+        
+        <input name="profession" placeholder="Profession" value="<%= formObject.profession || '' %>">
         <br><br>
 
-        <label for="professionInput">Profession</label>
-        <input name="profession" id="professionInput" value="<%= formObject.profession || '' %>">
+        <input name="country" placeholder="Country" value="<%= formObject.country || '' %>">
         <br><br>
 
-        <label for="countryInput">Country</label>
-        <input name="country" id="countryInput" value="<%= formObject.country || '' %>">
+        <input name="portrait" placeholder="Portrait URL" value="<%= formObject.portrait || '' %>">
         <br><br>
 
-        <label for="portraitInput">Portrait URL</label>
-        <input name="portrait" id="portraitInput" value="<%= formObject.portrait || '' %>">
-        <br><br>
-
-        <label for="biographyInput">Biography</label>
-        <textarea name="biography" id="biographyInput"><%= formObject.biography || '' %></textarea>
+        <textarea name="biography" placeholder="Biography"><%= formObject.biography || '' %></textarea>
         <br><br>
 
         <button>Create</button>
     </form>
+
     <p><a href="/">Home</a></p>
 </body>
 </html>

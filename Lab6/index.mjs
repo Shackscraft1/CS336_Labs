@@ -52,7 +52,7 @@ async function getQuoteFormData() {
     return {authors, categories};
 }
 
-// renders an empty new quote form
+// renders an empty new quote forms
 app.get('/newQuote', async (req, res) => {
     //this runs any queries to populate drop-downlists
     let formData = await getQuoteFormData();
@@ -67,7 +67,7 @@ app.post('/insertQuote', async (req, res) => {
     let authorId = req.body.authorId || '';
     let category = req.body.category || '';
     let likes = Number(req.body.likes);
-
+    
     let errors = {};
     let hasErrors = false;
 
@@ -111,10 +111,11 @@ app.post('/insertQuote', async (req, res) => {
 });
 
 app.get('/quoteList', async (req, res) => {
-    let quotesQuery = 'SELECT * FROM quotes;';
+    let quotesQuery = 'SELECT quotes.*, authors.firstName, authors.lastName FROM quotes JOIN authors ON quotes.authorId = authors.authorId;';
     const [rows] = await pool.query(quotesQuery);
 
     res.render('quoteList.ejs', {quotes: rows});
+
 });
 
 // renders the edit quote form
@@ -166,7 +167,7 @@ app.post('/updateQuote', async (req, res) => {
         hasErrors = true;
         errors.likes = 'Likes must be a number greater than or equal to 0';
     }
-
+    
     if (hasErrors) {
         //when we re-render the page with errors, we need to redownload the quote data
         //as well as the data for the dropdown lists
@@ -176,12 +177,7 @@ app.post('/updateQuote', async (req, res) => {
         res.render('editQuote.ejs', {formData, formObject, formErrors: errors});
 
     } else {
-        let updateQuery = `UPDATE quotes SET
-                           quote = ?,
-                           authorId = ?,
-                           category = ?,
-                           likes = ?
-                           WHERE quoteId = ?;`;
+        let updateQuery = `UPDATE quotes SET quote = ?, authorId = ?, category = ?, likes = ? WHERE quoteId = ?;`;
         let params = [quote, authorId, category, likes, quoteId];
 
         await pool.query(updateQuery, params);
@@ -209,7 +205,7 @@ app.post('/insertAuthor', async (req, res) => {
 
     if (firstName === '') {
         hasErrors = true;
-        errors.firstName = 'First name cannot be empty';
+        errors.firstName = 'First Name cannot be empty';
     }
 
     if (lastName === '') {

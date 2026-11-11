@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +8,15 @@
 </head>
 <body>
     <h1>Quotes</h1>
-    <% for (let quote of quotes)  { %>
+    <% for (let quote of quotes) { %>
         <div>
             <!-- Creates a link to the editQuote route -->
             <!-- narrowed down to the specific quote Id -->
             <!-- This route renders the edit form -->
             <a href="/editQuote?quoteId=<%= quote.quoteId %>">Update</a>
-            <%= quote.quote %>
+            "<%= quote.quote %>" -
+            <%= quote.firstName %> <%= quote.lastName %> -
+            Likes: <%= quote.likes %>
         </div>
     <% } %>
 </body>
