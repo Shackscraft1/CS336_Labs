@@ -5,69 +5,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Quote</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Edit Quote</h1>
-    <!-- Where you type in the quote -->
-    <form action="/updateQuote" method="post">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Quotes Admin</a>
+            <div class="d-flex flex-wrap gap-3">
+                <a class="text-white" href="/">Home</a>
+                <a class="text-white" href="/newQuote">New Quote</a>
+                <a class="text-white" href="/quoteList">Quotes</a>
+                <a class="text-white" href="/newAuthor">New Author</a>
+                <a class="text-white" href="/authorList">Authors</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-4">
+        <h1>Edit Quote</h1>
+        <div class="col-md-8 col-lg-6">
+            <!-- Where you type in the quote -->
+            <form action="/updateQuote" method="post">
 
-        <!-- This keeps track fo the quote Id we're editing so
-             we can submit this when we click update -->
-        <input type="hidden" name="quoteId" value="<%= formObject.quoteId %>">
+                <!-- This keeps track fo the quote Id we're editing so
+                     we can submit this when we click update -->
+                <input type="hidden" name="quoteId" value="<%= formObject.quoteId %>">
 
-        <label for="quoteInput">Quote</label>
-        <!-- The "value" being set fills in the text box with the current quote -->
-        <input name="quote" id="quoteInput" value="<%= formObject.quote %>">
+                <div class="mb-3">
+                    <label for="quoteInput" class="form-label">Quote</label>
+                    <!-- The "value" being set fills in the text box with the current quote -->
+                    <input class="form-control" name="quote" id="quoteInput" value="<%= formObject.quote %>">
 
-        <!-- Checks if there is a formErrors object 
-             and if it has an entry for the user field  -->
-        <% if (formErrors.quote) { %>
-            <span class="form-error"><%= formErrors.quote %></span>
-        <% } %>
-        <br><br>
+                    <!-- Checks if there is a formErrors object
+                         and if it has an entry for the user field  -->
+                    <% if (formErrors.quote) { %>
+                        <span class="text-danger"><%= formErrors.quote %></span>
+                    <% } %>
+                </div>
 
-        <label for="authorInput">Author</label>
-        <!-- The if statement is to make sure the correct author is selected by default -->
-        <select name="authorId" id="authorInput">
-            <option value="">Select an author</option>
-            <% for (let author of formData.authors) { %>
-                <% if (author.authorId == formObject.authorId) { %>
-                    <option value="<%= author.authorId %>" selected><%= author.firstName %> <%= author.lastName %></option>
-                <% } else { %>
-                    <option value="<%= author.authorId %>"><%= author.firstName %> <%= author.lastName %></option>
-                <% } %>
-            <% } %>
-        </select>
-        <% if (formErrors.authorId) { %>
-            <span class="form-error"><%= formErrors.authorId %></span>
-        <% } %>
-        <br><br>
+                <div class="mb-3">
+                    <label for="authorInput" class="form-label">Author</label>
+                    <!-- The if statement is to make sure the correct author is selected by default -->
+                    <select class="form-select" name="authorId" id="authorInput">
+                        <option value="">Select an author</option>
+                        <% for (let author of formData.authors) { %>
+                            <% if (author.authorId == formObject.authorId) { %>
+                                <option value="<%= author.authorId %>" selected><%= author.firstName %> <%= author.lastName %></option>
+                            <% } else { %>
+                                <option value="<%= author.authorId %>"><%= author.firstName %> <%= author.lastName %></option>
+                            <% } %>
+                        <% } %>
+                    </select>
+                    <% if (formErrors.authorId) { %>
+                        <span class="text-danger"><%= formErrors.authorId %></span>
+                    <% } %>
+                </div>
 
-        <label for="categoryInput">Category</label>
-        <select name="category" id="categoryInput">
-            <option value="">Select a category</option>
-            <% for (let category of formData.categories) { %>
-                <% if (category.category == formObject.category) { %>
-                    <option value="<%= category.category %>" selected><%= category.category %></option>
-                <% } else { %>
-                    <option value="<%= category.category %>"><%= category.category %></option>
-                <% } %>
-            <% } %>
-        </select>
-        <% if (formErrors.category) { %>
-            <span class="form-error"><%= formErrors.category %></span>
-        <% } %>
-        <br><br>
+                <div class="mb-3">
+                    <label for="categoryInput" class="form-label">Category</label>
+                    <select class="form-select" name="category" id="categoryInput">
+                        <option value="">Select a category</option>
+                        <% for (let category of formData.categories) { %>
+                            <% if (category.category == formObject.category) { %>
+                                <option value="<%= category.category %>" selected><%= category.category %></option>
+                            <% } else { %>
+                                <option value="<%= category.category %>"><%= category.category %></option>
+                            <% } %>
+                        <% } %>
+                    </select>
+                    <% if (formErrors.category) { %>
+                        <span class="text-danger"><%= formErrors.category %></span>
+                    <% } %>
+                </div>
 
-        <label for="likesInput">Likes</label>
-        <input type="number" name="likes" id="likesInput" min="0" value="<%= formObject.likes ?? 0 %>">
-        <% if (formErrors.likes) { %>
-            <span class="form-error"><%= formErrors.likes %></span>
-        <% } %>
-        <br><br>
+                <div class="mb-3">
+                    <label for="likesInput" class="form-label">Likes</label>
+                    <input class="form-control" type="number" name="likes" id="likesInput" min="0" value="<%= formObject.likes ?? 0 %>">
+                    <% if (formErrors.likes) { %>
+                        <span class="text-danger"><%= formErrors.likes %></span>
+                    <% } %>
+                </div>
 
-        <button>Update</button>
-    </form>
-    <p><a href="/quoteList">Back to Quotes</a></p>
+                <button class="btn btn-primary">Update</button>
+                <a class="btn btn-secondary" href="/quoteList">Back to Quotes</a>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -67,7 +67,7 @@ app.post('/insertQuote', async (req, res) => {
     let authorId = req.body.authorId || '';
     let category = req.body.category || '';
     let likes = Number(req.body.likes);
-    
+
     let errors = {};
     let hasErrors = false;
 
@@ -106,7 +106,7 @@ app.post('/insertQuote', async (req, res) => {
         await pool.query(insertQuery, params);
 
         //res.render('newQuote.ejs');
-        res.redirect('/newQuote');
+        res.redirect('/quoteList');
     }
 });
 
@@ -115,7 +115,6 @@ app.get('/quoteList', async (req, res) => {
     const [rows] = await pool.query(quotesQuery);
 
     res.render('quoteList.ejs', {quotes: rows});
-
 });
 
 // renders the edit quote form
@@ -133,7 +132,7 @@ app.get('/editQuote', async (req, res) => {
         //formData is the data for the dropdown lists
         //form object is the "starter" information for the quote we're editing so
         //      it can get plugged into the form
-        //formErrors is empty  
+        //formErrors is empty
         res.render('editQuote.ejs', {formData, formObject, formErrors: {}});
     }
 });
@@ -167,7 +166,7 @@ app.post('/updateQuote', async (req, res) => {
         hasErrors = true;
         errors.likes = 'Likes must be a number greater than or equal to 0';
     }
-    
+
     if (hasErrors) {
         //when we re-render the page with errors, we need to redownload the quote data
         //as well as the data for the dropdown lists
@@ -177,12 +176,20 @@ app.post('/updateQuote', async (req, res) => {
         res.render('editQuote.ejs', {formData, formObject, formErrors: errors});
 
     } else {
-        let updateQuery = `UPDATE quotes SET quote = ?, authorId = ?, category = ?, likes = ? WHERE quoteId = ?;`;
+        let updateQuery = 'UPDATE quotes SET quote = ?, authorId = ?, category = ?, likes = ? WHERE quoteId = ?;';
         let params = [quote, authorId, category, likes, quoteId];
 
         await pool.query(updateQuery, params);
         res.redirect('/quoteList');
     }
+});
+
+app.post('/deleteQuote', async (req, res) => {
+    let deleteQuery = 'DELETE FROM quotes WHERE quoteId = ?;';
+    let params = [req.body.quoteId];
+
+    await pool.query(deleteQuery, params);
+    res.redirect('/quoteList');
 });
 
 app.get('/newAuthor', (req, res) => {
@@ -229,8 +236,99 @@ app.post('/insertAuthor', async (req, res) => {
         let params = [firstName, lastName, dob, dod, gender, profession, country, portrait, biography];
 
         await pool.query(insertQuery, params);
-        res.redirect('/newAuthor');
+        res.redirect('/authorList');
     }
+});
+
+app.get('/authorList', async (req, res) => {
+    let authorsQuery = 'SELECT * FROM authors ORDER BY lastName, firstName;';
+    const [rows] = await pool.query(authorsQuery);
+
+    res.render('authorList.ejs', {authors: rows});
+});
+
+async function getAuthorById(authorId) {
+    let singleAuthorQuery = `SELECT authorId, firstName, lastName,
+                            DATE_FORMAT(dob, '%Y-%m-%d') AS dob,
+                            DATE_FORMAT(dod, '%Y-%m-%d') AS dod,
+                            gender, profession, country, portrait, biography
+                            FROM authors WHERE authorId = ?;`;
+    let params = [authorId];
+    const [rows] = await pool.query(singleAuthorQuery, params);
+
+    if (rows.length < 1) {
+        return null;
+    } else {
+        return rows[0];
+    }
+}
+
+app.get('/editAuthor', async (req, res) => {
+    let authorId = req.query.authorId;
+    let authorObject = await getAuthorById(authorId);
+
+    if (authorObject == null) {
+        res.redirect('/authorList');
+    } else {
+        let formObject = authorObject;
+        res.render('editAuthor.ejs', {formObject, formErrors: {}});
+    }
+});
+
+app.post('/updateAuthor', async (req, res) => {
+    let authorId = req.body.authorId;
+    let firstName = (req.body.firstName || '').trim();
+    let lastName = (req.body.lastName || '').trim();
+    let dob = req.body.dob || null;
+    let dod = req.body.dod || null;
+    let gender = req.body.gender || null;
+    let profession = req.body.profession || null;
+    let country = req.body.country || null;
+    let portrait = req.body.portrait || null;
+    let biography = req.body.biography || null;
+
+    let errors = {};
+    let hasErrors = false;
+
+    if (firstName === '') {
+        hasErrors = true;
+        errors.firstName = 'First Name cannot be empty';
+    }
+
+    if (lastName === '') {
+        hasErrors = true;
+        errors.lastName = 'Last name cannot be empty';
+    }
+
+    if (dob && dod && dod <= dob) {
+        hasErrors = true;
+        errors.dod = 'Date of death must be later than date of birth';
+    }
+
+    if (hasErrors) {
+        let formObject = req.body;
+        res.render('editAuthor.ejs', {formObject, formErrors: errors});
+
+    } else {
+        let updateQuery = `UPDATE authors SET firstName = ?, lastName = ?, dob = ?, dod = ?,
+                           gender = ?, profession = ?, country = ?, portrait = ?, biography = ?
+                           WHERE authorId = ?;`;
+        let params = [firstName, lastName, dob, dod, gender, profession, country, portrait, biography, authorId];
+
+        await pool.query(updateQuery, params);
+        res.redirect('/authorList');
+    }
+});
+
+app.post('/deleteAuthor', async (req, res) => {
+    let authorId = req.body.authorId;
+    let deleteQuotesQuery = 'DELETE FROM quotes WHERE authorId = ?;';
+    let deleteAuthorQuery = 'DELETE FROM authors WHERE authorId = ?;';
+    let params = [authorId];
+
+    await pool.query(deleteQuotesQuery, params);
+    await pool.query(deleteAuthorQuery, params);
+    res.redirect('/authorList');
 });
 
 app.get('/dbTest', async (req, res) => {
