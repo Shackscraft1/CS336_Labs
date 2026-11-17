@@ -1,0 +1,66 @@
+
+<%- include('partials/header', {title: 'Edit Author'}) %>
+<main class="container py-4 flex-grow-1">
+    <h1>Edit Author</h1>
+    <form action="/updateAuthor" method="post" class="col-md-8 col-lg-7">
+        <input type="hidden" name="authorId" value="<%= formObject.authorId %>">
+
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input class="form-control" name="firstName" id="firstName" value="<%= formObject.firstName || '' %>">
+            <% if (formErrors.firstName) { %>
+                <span class="form-error"><%= formErrors.firstName %></span>
+            <% } %>
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input class="form-control" name="lastName" id="lastName" value="<%= formObject.lastName || '' %>">
+            <% if (formErrors.lastName) { %>
+                <span class="form-error"><%= formErrors.lastName %></span>
+            <% } %>
+        </div>
+
+        <div class="mb-3">
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input class="form-control" type="date" name="dob" id="dob" value="<%= formObject.dob || '' %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="dod" class="form-label">Date of Death</label>
+            <input class="form-control" type="date" name="dod" id="dod" value="<%= formObject.dod || '' %>">
+            <% if (formErrors.dod) { %>
+                <span class="form-error"><%= formErrors.dod %></span>
+            <% } %>
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <input class="form-control" name="gender" id="gender" value="<%= formObject.gender || '' %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="profession" class="form-label">Profession</label>
+            <input class="form-control" name="profession" id="profession" value="<%= formObject.profession || '' %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input class="form-control" name="country" id="country" value="<%= formObject.country || '' %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="portrait" class="form-label">Portrait URL</label>
+            <input class="form-control" name="portrait" id="portrait" value="<%= formObject.portrait || '' %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="biography" class="form-label">Biography</label>
+            <textarea class="form-control" name="biography" id="biography" rows="4"><%= formObject.biography || '' %></textarea>
+        </div>
+
+        <button class="btn btn-primary">Update</button>
+        <a href="/authorList" class="btn btn-secondary">Back to Authors</a>
+    </form>
+</main>
+<%- include('partials/footer') %>

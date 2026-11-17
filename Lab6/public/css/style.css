@@ -1,0 +1,24 @@
+
+body {
+    background-color: #f8f9fa;
+}
+
+main {
+    width: 100%;
+    max-width: 900px;
+}
+
+.csumb-logo {
+    width: 190px;
+    max-width: 100%;
+    height: auto;
+}
+
+.form-error {
+    color: #b42318;
+}
+
+.item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
