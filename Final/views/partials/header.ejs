@@ -28,6 +28,7 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form action="/logout" method="POST">
+                                            <input type="hidden" name="authToken" value="<%= authToken %>">
                                             <button class="dropdown-item" type="submit">Log Out</button>
                                         </form>
                                     </li>

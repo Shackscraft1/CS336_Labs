@@ -13,6 +13,7 @@
                 <div class="d-flex gap-2 align-items-center flex-wrap">
                     <% if (currentUser) { %>
                         <form action="/character/<%= character.id %>/like" method="POST">
+                            <input type="hidden" name="authToken" value="<%= authToken %>">
                             <button class="btn btn-outline-danger" type="submit"><%= userLiked ? '♥ Unlike' : '♡ Like' %></button>
                         </form>
                     <% } else { %>
@@ -29,6 +30,7 @@
                 <% } %>
                 <% if (currentUser) { %>
                     <form action="/character/<%= character.id %>/comment" method="POST">
+                        <input type="hidden" name="authToken" value="<%= authToken %>">
                         <label class="form-label" for="comment">Add a comment</label>
                         <textarea id="comment" name="comment" class="form-control mb-2" rows="3" maxlength="1000" required></textarea>
                         <button class="btn btn-primary" type="submit">Post Comment</button>
